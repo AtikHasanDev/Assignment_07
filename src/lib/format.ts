@@ -54,3 +54,19 @@ export function formatBnDate(date: Date = new Date()): string {
   const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
   return toBn(`${get("weekday")}, ${get("day")} ${get("month")}, ${get("year")}`);
 }
+
+/**
+ * Text colour for a price change.
+ * README: green = up, red = down, gray = flat.
+ * (The Figma uses the opposite: swap "text-success"/"text-error" here to match it.)
+ */
+export const CHANGE_TEXT: Record<ChangeDir, string> = {
+  up: "text-success",
+  down: "text-error",
+  flat: "text-base-content/60",
+};
+
+/** "▲ ২.১%" / "▼ ২.৯%" / "— ০.০%" */
+export function formatChange(dir: ChangeDir, pct: number): string {
+  return `${ARROW[dir]} ${formatPct(pct)}`;
+}

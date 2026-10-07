@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/navbar/Navbar";
+import PriceTicker from "@/components/ticker/PriceTicker";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-base-100 text-base-content antialiased">
         <Providers>
           <Navbar />
-          {/* Price ticker goes here (Part 3) */}
+          <PriceTicker />
           <main className="flex-1">{children}</main>
           {/* Footer goes here (Part 4) */}
         </Providers>
