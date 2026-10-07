@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import Providers from "@/components/Providers";
+import Navbar from "@/components/navbar/Navbar";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -22,7 +23,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="bn" data-theme="bazardor" className={`${hindSiliguri.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-base-100 text-base-content antialiased">
         <Providers>
-          {/* Navbar + ticker go here (Part 2–3) */}
+          <Navbar />
+          {/* Price ticker goes here (Part 3) */}
           <main className="flex-1">{children}</main>
           {/* Footer goes here (Part 4) */}
         </Providers>
