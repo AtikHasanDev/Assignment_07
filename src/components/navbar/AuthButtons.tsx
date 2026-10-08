@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import UserAvatar from "@/components/UserAvatar";
 import { signOut, useSession } from "@/lib/auth-client";
 
 function closeDropdown() {
@@ -50,15 +50,7 @@ export default function AuthButtons() {
         className="btn btn-ghost btn-sm sm:btn-md gap-2 rounded-lg px-1 sm:px-2"
         aria-label="ব্যবহারকারী মেনু"
       >
-        <span className="avatar">
-          <span className="flex size-8 items-center justify-center overflow-hidden rounded-[10.5px] bg-primary text-sm font-semibold text-primary-content sm:size-9">
-            {user.image ? (
-              <Image src={user.image} alt={user.name} width={36} height={36} unoptimized />
-            ) : (
-              user.name?.charAt(0).toUpperCase()
-            )}
-          </span>
-        </span>
+        <UserAvatar name={user.name} image={user.image} size={36} className="rounded-[10.5px]" />
         <span className="hidden max-w-24 truncate text-sm font-medium sm:inline">{firstName}</span>
         <span aria-hidden className="text-xs">▾</span>
       </div>
