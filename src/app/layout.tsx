@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="bn" data-theme="bazardor" className={`${hindSiliguri.variable} h-full`}>
+    <html lang="bn" data-theme="bazardor" data-scroll-behavior="smooth" className={`${hindSiliguri.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-base-200 text-base-content antialiased">
         <Providers>
           <Navbar />

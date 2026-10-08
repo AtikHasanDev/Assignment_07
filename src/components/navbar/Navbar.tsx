@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { getCategories } from "@/lib/api";
 import type { Category } from "@/lib/types";
 import AuthButtons from "./AuthButtons";
 import BanglaDate from "./BanglaDate";
+import CategoryLinks from "./CategoryLinks";
 import CategoryNav from "./CategoryNav";
 
 export default async function Navbar() {
@@ -29,7 +31,11 @@ export default async function Navbar() {
         <AuthButtons />
       </div>
 
-      <CategoryNav categories={categories} />
+      {/* usePathname() needs a Suspense boundary in Next 16; the fallback is the
+          same chip row without the active highlight */}
+      <Suspense fallback={<CategoryLinks categories={categories} activeHref={null} />}>
+        <CategoryNav categories={categories} />
+      </Suspense>
     </header>
   );
 }

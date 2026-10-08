@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { signIn } from "@/lib/auth-client";
 import { authErrorMessage, safeRedirect } from "@/lib/auth-errors";
@@ -10,8 +10,18 @@ import FormField from "./FormField";
 import SocialButtons from "./SocialButtons";
 
 export default function SignInForm() {
-  const router = useRouter();
-  const redirectTo = safeRedirect(useSearchParams().get("redirect"));
+  const searchParams = useSearchParams();
+  const redirectTo = safeRedirect(searchParams.get("redirect"));
+  const fromProtected = searchParams.get("reason") === "protected";
+
+  // Toast when the user was bounced here from a protected page (README requirement)
+  const toasted = useRef(false);
+  useEffect(() => {
+    if (fromProtected && !toasted.current) {
+      toasted.current = true;
+      toast.error("এই পাতাটি দেখতে আগে সাইন ইন করুন।", { id: "protected" });
+    }
+  }, [fromProtected]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
@@ -39,8 +49,11 @@ export default function SignInForm() {
       return;
     }
     toast.success("সফলভাবে সাইন ইন হয়েছে!");
-    router.push(redirectTo);
-    router.refresh();
+    // Full page load (not router.push): the router may still hold the earlier
+    // "redirect to /signin" response for a protected page, which would bounce
+    // the user straight back here. A real navigation re-checks with the new cookie.
+    setLoading(true); // keep the button disabled while we leave the page
+    setTimeout(() => window.location.assign(redirectTo), 700); // let the toast be seen
   }
 
   return (
