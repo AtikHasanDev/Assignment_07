@@ -3,8 +3,7 @@
 **প্রয়োজনীয় পণ্যের দাম এক নজরে।**
 BazarDor is a Bangla-first market price tracker for Bangladesh. It shows today's prices of everyday essentials — rice, lentils, oil, vegetables, fish, meat, eggs/dairy and spices — with day-to-day changes and a market-by-market comparison across 12 bazars in 6 divisions.
 
-🔗 **Live:** _add your Vercel link here_  
-📦 **Repository:** https://github.com/AtikHasanDev/Assignment_07
+🔗 **Live:** https://bazardor-atik.vercel.app/
 
 ---
 
