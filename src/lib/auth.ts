@@ -11,7 +11,9 @@ export const auth = betterAuth({
   // Email + password login (no email verification / reset, per assignment)
   emailAndPassword: {
     enabled: true,
-    autoSignIn: false, // after sign-up, send user to /signin
+    // Note: autoSignIn:false would make BetterAuth hide "email already exists"
+    // errors (it returns a fake success). We keep autoSignIn on and sign the
+    // user out on the client right after sign-up instead (see SignUpForm).
   },
 
   // Google + GitHub social login
