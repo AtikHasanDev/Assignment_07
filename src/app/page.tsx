@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import AllProducts, { AllProductsSkeleton } from "@/components/home/AllProducts";
 import Hero from "@/components/home/Hero";
 import PriceMovers from "@/components/home/PriceMovers";
 import { ProductGridSkeleton } from "@/components/product/ProductCardSkeleton";
@@ -28,6 +29,11 @@ function MoversSkeleton() {
   );
 }
 
+async function AllProductsSection() {
+  const products = await getProducts();
+  return <AllProducts products={products} />;
+}
+
 export default function Home() {
   return (
     <div className="mx-auto max-w-6xl space-y-10 px-4 py-6">
@@ -35,7 +41,9 @@ export default function Home() {
       <Suspense fallback={<MoversSkeleton />}>
         <MoversSections />
       </Suspense>
-      {/* সব পণ্য grid (Part 7) goes here */}
+      <Suspense fallback={<AllProductsSkeleton />}>
+        <AllProductsSection />
+      </Suspense>
     </div>
   );
 }
